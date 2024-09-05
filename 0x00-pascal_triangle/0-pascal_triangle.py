@@ -3,19 +3,16 @@
 0. Pascal's Triangle
 """
 
-
 def pascal_triangle(n):
-    """Create a function that returns a list of lists of integers
-    representing the Pascal’s triangle of n.
-    """
-    res = []
-    if n > 0:
-        for i in range(n):
-            level = [1]  # Start each level with 1
-            # Calculate the values in the current level
-            for j in range(1, i):
-                level.append(level[j - 1] * (i - j + 1) // j)
-            level.append(1)  # End each level with 1
-            res.append(level)
+    """Returns a list of lists of integers representing Pascal’s triangle of n."""
+    if n <= 0:
+        return []
+    
+    res = [[1]]  
+    for i in range(1, n):
+        row = [1] * (i + 1)
+        for j in range(1, i):
+            row[j] = res[i - 1][j - 1] + res[i - 1][j]
+        res.append(row)
+    
     return res
-
